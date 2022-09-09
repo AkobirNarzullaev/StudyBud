@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import django_on_heroku
+import os
+import dj_database_url
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +27,7 @@ SECRET_KEY = 'django-insecure-p96&79@+m8*r=g5p-(fl&-b)%)rr5s$6op_k&gt!74&)9!k1gw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['study-buddy-uz.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['studybuddy-uz.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -56,6 +59,7 @@ MIDDLEWARE = [
 
   "corsheaders.middleware.CorsMiddleware",
   "django.middleware.common.CommonMiddleware",
+  "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
@@ -130,6 +134,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
   BASE_DIR / 'static'
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
